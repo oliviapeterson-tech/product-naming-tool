@@ -401,6 +401,16 @@
     font-weight: 600;
     color: var(--green-800);
   }
+  .points-display {
+    padding: 6px 10px;
+    font-size: 13px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--green-800);
+    background: var(--green-50);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--green-100);
+  }
   .del-btn {
     width: 28px; height: 28px;
     border-radius: 50%;
@@ -648,28 +658,10 @@
 
     <!-- Panel 1: Name -->
     <div id="panel-name" class="tab-panel active">
-      <div class="inspo-box">
-        <div class="inspo-header">Suggested names — click to select or type your own below</div>
-        <div class="name-chips">
-          <button class="name-chip" onclick="selectChip(this,'Thrive')">Thrive</button>
-          <button class="name-chip" onclick="selectChip(this,'Vitara')">Vitara</button>
-          <button class="name-chip" onclick="selectChip(this,'Luminate')">Luminate</button>
-          <button class="name-chip" onclick="selectChip(this,'Wellspring')">Wellspring</button>
-          <button class="name-chip" onclick="selectChip(this,'Meridian')">Meridian</button>
-          <button class="name-chip" onclick="selectChip(this,'Momentum')">Momentum</button>
-          <button class="name-chip" onclick="selectChip(this,'Wholara')">Wholara</button>
-          <button class="name-chip" onclick="selectChip(this,'Lifemark')">Lifemark</button>
-          <button class="name-chip" onclick="selectChip(this,'Nourish')">Nourish</button>
-          <button class="name-chip" onclick="selectChip(this,'Flourish')">Flourish</button>
-          <button class="name-chip" onclick="selectChip(this,'Vitalix')">Vitalix</button>
-          <button class="name-chip" onclick="selectChip(this,'Kindred')">Kindred</button>
-        </div>
-      </div>
-
       <div class="field-group">
         <label class="field-label" for="productName">Your product name idea</label>
-        <div class="field-hint">Can be one word, two words, or a creative compound. Think about what captures both the reward journey and whole-person wellbeing.</div>
-        <input type="text" id="productName" placeholder="e.g. Thrive, Vitara, Wholemark…" />
+        <div class="field-hint">This is your idea — be creative! Can be one word, two words, or a creative compound. Think about what captures both the reward journey and whole-person wellbeing.</div>
+        <input type="text" id="productName" placeholder="Type your name idea here…" />
       </div>
 
       <div class="field-group">
@@ -703,58 +695,9 @@
       </div>
 
       <div class="field-group">
-        <label class="field-label">Rewarded actions &amp; point values</label>
-        <div class="field-hint">Edit values, remove actions you disagree with, or add new ones. What behaviors deserve recognition?</div>
-        <div class="points-table-wrap">
-          <div class="points-table-header">
-            <span>Action</span><span style="text-align:center">Points</span><span></span>
-          </div>
-          <div id="actionsTable">
-            <div class="points-row">
-              <div class="row-info"><div class="row-action">Daily step goal met</div><div class="row-cat">Physical</div></div>
-              <input type="number" value="10" min="1" />
-              <button class="del-btn" onclick="delRow(this)" title="Remove">×</button>
-            </div>
-            <div class="points-row">
-              <div class="row-info"><div class="row-action">Annual wellness screening</div><div class="row-cat">Physical</div></div>
-              <input type="number" value="150" min="1" />
-              <button class="del-btn" onclick="delRow(this)" title="Remove">×</button>
-            </div>
-            <div class="points-row">
-              <div class="row-info"><div class="row-action">Mindfulness session completed</div><div class="row-cat">Mental</div></div>
-              <input type="number" value="25" min="1" />
-              <button class="del-btn" onclick="delRow(this)" title="Remove">×</button>
-            </div>
-            <div class="points-row">
-              <div class="row-info"><div class="row-action">7+ hours sleep logged</div><div class="row-cat">Mental</div></div>
-              <input type="number" value="15" min="1" />
-              <button class="del-btn" onclick="delRow(this)" title="Remove">×</button>
-            </div>
-            <div class="points-row">
-              <div class="row-info"><div class="row-action">Emergency fund contribution</div><div class="row-cat">Financial</div></div>
-              <input type="number" value="50" min="1" />
-              <button class="del-btn" onclick="delRow(this)" title="Remove">×</button>
-            </div>
-            <div class="points-row">
-              <div class="row-info"><div class="row-action">Social connection activity</div><div class="row-cat">Emotional</div></div>
-              <input type="number" value="20" min="1" />
-              <button class="del-btn" onclick="delRow(this)" title="Remove">×</button>
-            </div>
-          </div>
-          <div class="add-row">
-            <div>
-              <div class="add-label">New action</div>
-              <input type="text" id="newAction" placeholder="e.g. Gratitude journal entry" />
-            </div>
-            <div>
-              <div class="add-label">Points</div>
-              <input type="number" id="newPoints" placeholder="30" min="1" />
-            </div>
-            <div style="padding-top:20px">
-              <button class="add-btn" onclick="addAction()">+ Add</button>
-            </div>
-          </div>
-        </div>
+        <label class="field-label" for="pointsActions">Suggested rewarded actions</label>
+        <div class="field-hint">What behaviors do you think deserve recognition? List as many as you'd like — physical, mental, financial, emotional, or anything else.</div>
+        <textarea id="pointsActions" placeholder="e.g. Daily step goal met, gratitude journal entry, completed mindfulness session, contributed to savings…" style="min-height:110px;"></textarea>
       </div>
 
       <div class="field-group">
@@ -771,23 +714,6 @@
       <div class="field-group">
         <label class="field-label" for="submitterName">Your name</label>
         <input type="text" id="submitterName" placeholder="First and last name" />
-      </div>
-      <div class="field-group">
-        <label class="field-label" for="submitterTeam">Your team / department</label>
-        <select id="submitterTeam">
-          <option value="">Select your team…</option>
-          <option>Product</option>
-          <option>Engineering</option>
-          <option>Design</option>
-          <option>Marketing</option>
-          <option>Sales</option>
-          <option>Customer Success</option>
-          <option>Operations</option>
-          <option>Finance</option>
-          <option>People &amp; HR</option>
-          <option>Leadership</option>
-          <option>Other</option>
-        </select>
       </div>
       <div class="field-group">
         <label class="field-label" for="extraNote">Anything else you'd like to share?</label>
@@ -827,65 +753,41 @@
     window.scrollTo({ top: document.querySelector('.form-container').offsetTop - 70, behavior: 'smooth' });
   }
 
-  function selectChip(el, name) {
-    document.querySelectorAll('.name-chip').forEach(c => c.classList.remove('selected'));
-    el.classList.add('selected');
-    document.getElementById('productName').value = name;
-  }
-
-  function delRow(btn) {
-    btn.closest('.points-row').remove();
-  }
-
-  function addAction() {
-    const name = document.getElementById('newAction').value.trim();
-    const pts = parseInt(document.getElementById('newPoints').value);
-    if (!name || !pts || pts < 1) return;
-    const table = document.getElementById('actionsTable');
-    const row = document.createElement('div');
-    row.className = 'points-row';
-    row.innerHTML = `
-      <div class="row-info"><div class="row-action">${name}</div><div class="row-cat">Custom</div></div>
-      <input type="number" value="${pts}" min="1" />
-      <button class="del-btn" onclick="delRow(this)" title="Remove">×</button>
-    `;
-    table.appendChild(row);
-    document.getElementById('newAction').value = '';
-    document.getElementById('newPoints').value = '';
-  }
-
   function handleSubmit() {
     const name = document.getElementById('productName').value.trim();
     const submitter = document.getElementById('submitterName').value.trim();
-    if (!name) { alert('Please enter a product name idea first.'); switchTab('name', document.querySelectorAll('.tab-btn')[0]); return; }
-    if (!submitter) { alert('Please enter your name before submitting.'); return; }
+    const rationale = document.getElementById('nameRationale').value.trim();
+    const tone = document.getElementById('nameTone').value;
+    const currency = document.getElementById('pointsCurrency').value.trim();
+    const pointsActions = document.getElementById('pointsActions').value.trim();
+    const pointsExtra = document.getElementById('pointsExtra').value.trim();
+    const extraNote = document.getElementById('extraNote').value.trim();
 
-    const rows = document.querySelectorAll('#actionsTable .points-row');
-    const sampleActions = Array.from(rows).slice(0, 3).map(r => {
-      const label = r.querySelector('.row-action').textContent;
-      const pts = r.querySelector('input').value;
-      return `${label} (${pts}pts)`;
-    }).join(', ');
+    // Soft check — at least something should be filled in
+    const hasContent = name || rationale || tone || currency || pointsActions || pointsExtra || extraNote;
+    if (!hasContent) {
+      alert('Please share at least one idea before submitting.');
+      return;
+    }
 
     const data = {
-      productName: name,
-      nameRationale: document.getElementById('nameRationale').value,
-      nameTone: document.getElementById('nameTone').value,
-      pointsCurrency: document.getElementById('pointsCurrency').value || 'Not specified',
-      sampleActions,
-      pointsExtra: document.getElementById('pointsExtra').value,
-      submitterName: submitter,
-      submitterTeam: document.getElementById('submitterTeam').value || 'Not specified',
-      extraNote: document.getElementById('extraNote').value,
+      productName: name || 'Not specified',
+      nameRationale: rationale || 'Not specified',
+      nameTone: tone || 'Not specified',
+      pointsCurrency: currency || 'Not specified',
+      pointsActions: pointsActions || 'Not specified',
+      pointsExtra: pointsExtra || 'Not specified',
+      submitterName: submitter || 'Anonymous',
+      extraNote: extraNote || 'Not specified',
       submittedAt: new Date().toLocaleString()
     };
 
     const rows2 = [
       ['Name idea', data.productName],
-      ['Tone', data.nameTone || 'Not specified'],
+      ['Tone', data.nameTone],
       ['Points currency', data.pointsCurrency],
-      ['Sample actions', data.sampleActions],
-      ['Submitted by', `${data.submitterName} · ${data.submitterTeam}`],
+      ['Suggested actions', data.pointsActions],
+      ['Submitted by', data.submitterName],
       ['Submitted at', data.submittedAt],
     ];
     document.getElementById('summaryRows').innerHTML = rows2.map(([k, v]) =>
@@ -905,10 +807,8 @@
     document.getElementById('successState').style.display = 'none';
     document.getElementById('panel-name').classList.add('active');
     document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', i === 0));
-    ['productName','nameRationale','pointsCurrency','pointsExtra','submitterName','extraNote'].forEach(id => document.getElementById(id).value = '');
+    ['productName','nameRationale','pointsCurrency','pointsActions','pointsExtra','submitterName','extraNote'].forEach(id => document.getElementById(id).value = '');
     document.getElementById('nameTone').value = '';
-    document.getElementById('submitterTeam').value = '';
-    document.querySelectorAll('.name-chip').forEach(c => c.classList.remove('selected'));
   }
 </script>
 </body>
