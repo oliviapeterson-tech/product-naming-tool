@@ -753,7 +753,9 @@
     window.scrollTo({ top: document.querySelector('.form-container').offsetTop - 70, behavior: 'smooth' });
   }
 
-  function handleSubmit() {
+  const SHEET_URL = 'https://script.google.com/a/macros/capillarytech.com/s/AKfycbyaKi-z1JqC7ZCjT74-2T0XZmzP4LDDqz8cM6vxVf5DK0eoGlNjnkv9faNzOosYHz36/exec';
+
+  async function handleSubmit() {
     const name = document.getElementById('productName').value.trim();
     const submitter = document.getElementById('submitterName').value.trim();
     const rationale = document.getElementById('nameRationale').value.trim();
@@ -782,6 +784,34 @@
       submittedAt: new Date().toLocaleString()
     };
 
+    // Disable submit button to prevent double-submission
+    const submitBtn = document.querySelector('#panel-about .btn-primary');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting…';
+    submitBtn.style.opacity = '0.7';
+    submitBtn.style.cursor = 'wait';
+
+    try {
+      // Send to Google Sheets via Apps Script.
+      // Note: 'no-cors' mode is required for Apps Script web apps from a browser.
+      // This means we can't read the response, but the data still arrives.
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(data)
+      });
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+      submitBtn.style.opacity = '';
+      submitBtn.style.cursor = '';
+      alert('Sorry, something went wrong submitting your ideas. Please check your internet connection and try again.');
+      console.error('Submission error:', err);
+      return;
+    }
+
     const rows2 = [
       ['Name idea', data.productName],
       ['Tone', data.nameTone],
@@ -798,7 +828,13 @@
     document.querySelector('.tabs-nav').style.display = 'none';
     document.getElementById('successState').style.display = 'block';
 
-    console.log('Submission:', JSON.stringify(data, null, 2));
+    // Reset button state for next submission
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+    submitBtn.style.opacity = '';
+    submitBtn.style.cursor = '';
+
+    console.log('Submission sent:', JSON.stringify(data, null, 2));
   }
 
   function resetForm() {
